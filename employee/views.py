@@ -44,6 +44,7 @@ def leave(Request):
             daydiff = end.weekday() - start.weekday()
 
             days = ((end - start).days - daydiff) / 7 * 5 + min(daydiff, 5) - (max(end.weekday() - 4, 0) % 5)
+
             print(start,'********',days,'********',end)
 
             # ind_holidays = holidays.India()
@@ -52,8 +53,7 @@ def leave(Request):
             form.save(commit=True)
             if form.is_valid():
                 form.save(commit=True)
-                print('^^^^^^^^^^',days,'^^^^^^^^^^')
-                return redirect('leave')
+                return render(Request, 'employee/display.html', context={'days': days})
 
             # return redirect('leave')
             else:
